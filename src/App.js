@@ -1,7 +1,11 @@
-import {NavigationContainer} from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useRef} from 'react';
+import FlashMessage from 'react-native-flash-message';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import Router from './routes';
+import {Persistore, Store} from './store';
 
 const MainApp = () => {
   const routeNameRef = useRef();
@@ -26,10 +30,17 @@ const MainApp = () => {
         routeNameRef.current = currentRouteName;
       }}>
       <Router />
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 };
 
 export default function App() {
-  return <MainApp />;
+  return (
+    <Provider store={Store}>
+      <PersistGate loading={null} persistor={Persistore}>
+        <MainApp />
+      </PersistGate>
+    </Provider>
+  );
 }

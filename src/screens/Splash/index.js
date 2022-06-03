@@ -1,17 +1,24 @@
 import LottieView from 'lottie-react-native';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import {Pokeball} from '../../assets';
 import {COLORS, FONTS, SIZES} from '../../themes';
 
 export default function Splash({navigation}) {
+  const {isLogin} = useSelector(state => state.UserReducer);
   return (
     <View style={styles.container}>
       <LottieView
         source={Pokeball}
         style={styles.logoImage}
         autoPlay
-        loop={true}
+        loop={false}
+        onAnimationFinish={() => {
+          isLogin
+            ? navigation.replace('DashboardScreen')
+            : navigation.replace('LoginScreen');
+        }}
       />
       <Text style={styles.copyright}>Made by ❤️</Text>
     </View>
