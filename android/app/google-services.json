@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "112546361758-fkum8bmi39i42c98bfh3o8rov775s2fg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pokedexapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "112546361758-tglon38rtfvjis4j3s5cm1jqab2s0erb.apps.googleusercontent.com",
           "client_type": 3
         }
