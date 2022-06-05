@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Text, View} from 'react-native';
 
 export default function PokeDetail() {
   return (
@@ -9,4 +9,4 @@ export default function PokeDetail() {
   );
 }
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});

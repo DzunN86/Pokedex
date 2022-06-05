@@ -25,7 +25,7 @@ export default function Login({navigation}) {
   const onLogin = data => {
     setLoading(true);
     login(data.email, data.password)
-      .then(res => {
+      .then(() => {
         getProfile(data.email).then(async snapshot => {
           if (snapshot.val() == null) {
             Alert.alert('Invalid Email Id');
