@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PokedexApp</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">W0hJa7U5rO0RlUxwvfxIA4mQrmA6R3lukDV-y</string>
 </resources>
