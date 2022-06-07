@@ -22,9 +22,9 @@ export const addUser = (email, name, uid, bio) =>
       avatar: 'https://i.pravatar.cc/300',
     });
 
-export const getProfile = id_user =>
+export const getProfile = email =>
   database()
     .ref('users/')
     .orderByChild('id_user')
-    .equalTo(id_user)
+    .equalTo(email)
     .once('value');

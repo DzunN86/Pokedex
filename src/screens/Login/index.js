@@ -12,30 +12,30 @@ import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch} from 'react-redux';
 import {Pikachu} from '../../assets';
 import {CustomButton, CustomInput} from '../../components';
-import {showError} from '../../plugins';
+import {loginSchema, showError} from '../../plugins';
 import {getProfile, login} from '../../services';
 import {setUser} from '../../store/actions';
 import {COLORS, FONTS, SIZES} from '../../themes';
+import {Formik} from 'formik';
 
 export default function Login({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const onLogin = data => {
+  const onLogin = ({ email, password }) => {
     setLoading(true);
-    login(data.email, data.password)
+    login(email, password)
       .then(() => {
-        getProfile(data.email).then(async snapshot => {
+        getProfile(email).then(async snapshot => {
           if (snapshot.val() == null) {
             Alert.alert('Invalid Email Id');
             return false;
           }
           let userData = Object.values(snapshot.val())[0];
-          console.log(userData);
           dispatch(setUser(userData));
         });
-        navigation.navigate('DashboardUserScreen');
+        navigation.navigate('DashboardScreen');
         setLoading(false);
       })
       .catch(err => {
@@ -49,41 +49,57 @@ export default function Login({navigation}) {
       <View style={styles.container}>
         <LottieView style={styles.logoImage} source={Pikachu} autoPlay />
         <View style={styles.form}>
-          <CustomInput
-            testID="input-email"
-            label="Email"
-            name="email"
-            iconPosition="right"
-            placeholder="Enter Email"
-          />
-          <CustomInput
-            testID="input-password"
-            label="Password"
-            name="password"
-            iconPosition="right"
-            secureTextEntry={isSecureEntry}
-            placeholder="Enter Password"
-            icon={
-              <TouchableOpacity
-                onPress={() => {
-                  setIsSecureEntry(prev => !prev);
-                }}>
-                <Icon
-                  name={isSecureEntry ? 'eye-off' : 'eye'}
-                  size={24}
-                  color={COLORS.gray}
+          <Formik
+            initialValues={{email: '', password: ''}}
+            validationSchema={loginSchema}
+            onSubmit={values => onLogin(values)}>
+            {({handleChange, handleSubmit, values, errors, isValid, dirty,}) => (
+              <>
+                <CustomInput
+                  testID="input-email"
+                  label="Email"
+                  name="email"
+                  onChangeText={handleChange('email')}
+                  value={values.email}
+                  error={errors.email}
+                  iconPosition="right"
+                  placeholder="Enter Email"
                 />
-              </TouchableOpacity>
-            }
-          />
-          <CustomButton
-            testID="btn-login"
-            primary
-            loading={loading}
-            disabled={loading}
-            title="LOGIN"
-            onPress={onLogin}
-          />
+                <CustomInput
+                  testID="input-password"
+                  label="Password"
+                  name="password"
+                  iconPosition="right"
+                  secureTextEntry={isSecureEntry}
+                  placeholder="Enter Password"
+                  onChangeText={handleChange('password')}
+                  value={values.password}
+                  error={errors.password}
+                  icon={
+                    <TouchableOpacity
+                      onPress={() => {
+                        setIsSecureEntry(prev => !prev);
+                      }}>
+                      <Icon
+                        name={isSecureEntry ? 'eye-off' : 'eye'}
+                        size={24}
+                        color={COLORS.gray}
+                      />
+                    </TouchableOpacity>
+                  }
+                />
+                <CustomButton
+                  testID="btn-login"
+                  primary
+                  loading={loading}
+                  disabled={loading}
+                  title="LOGIN"
+                  disable={!(dirty && isValid)}
+                  onPress={handleSubmit}
+                />
+              </>
+            )}
+          </Formik>
 
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Dont have an account?</Text>
