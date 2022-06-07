@@ -6,9 +6,9 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import Router from './routes';
 import {Persistore, Store} from './store';
-import codePush from 'react-native-code-push';
+// import codePush from 'react-native-code-push';
 
-let codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_START};
+// let codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_START};
 
 const MainApp = () => {
   const routeNameRef = useRef();
@@ -48,4 +48,5 @@ const App = () => {
   );
 };
 
-export default codePush(codePushOptions)(App);
+// export default codePush(codePushOptions)(App);
+export default App;
