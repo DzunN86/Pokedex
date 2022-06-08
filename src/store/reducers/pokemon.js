@@ -11,7 +11,7 @@ export const PokeReducer = (state = initialState, action) => {
     case SET_POKEMON:
       return {
         ...state,
-        pokemons: action.payload,
+        pokemons: [...state.pokemons, ...action.payload],
       };
     case POKEMON_LOADING:
       return {
