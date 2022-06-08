@@ -24,13 +24,13 @@ export function fetchPokemons(next) {
       if (next) {
         url = next;
       } else {
-        url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20';
+        url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10';
       }
       const res = await Axios.get(url);
-      let result = await res.data.result;
+      let result = await res.data;
 
       const pokemonsArray = [];
-      for await (const pokemon of result) {
+      for await (const pokemon of result.results) {
         const pokemonDetailsResponse = await Axios.get(pokemon.url);
         const pokemonDetails = await pokemonDetailsResponse.data;
 
@@ -41,15 +41,8 @@ export function fetchPokemons(next) {
             pokemonDetails.name.substring(1),
           type: pokemonDetails.types[0].type.name,
           types: pokemonDetails.types,
-          moves: pokemonDetails.moves,
-          order: pokemonDetails.order,
           imgUrl:
             pokemonDetails.sprites.other['official-artwork'].front_default,
-          species: pokemonDetails.species.name,
-          height: pokemonDetails.height,
-          weight: pokemonDetails.weight,
-          abilities: pokemonDetails.abilities,
-          stats: pokemonDetails.stats,
         });
       }
 
