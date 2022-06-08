@@ -10,7 +10,6 @@ export default function Dashboard() {
   const pokemons = useSelector(state => state.PokeReducer.pokemons);
   // const loading = useSelector(state => state.PokeReducer.loading);
   // const next = useSelector(state => state.PokeReducer.next);
-  // const back = useSelector(state => state.PokeReducer.back);
 
   useEffect(() => {
     dispatch(fetchPokemons());

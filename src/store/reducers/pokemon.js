@@ -1,9 +1,8 @@
-import {POKEMON_LOADING, SET_BACK, SET_NEXT, SET_POKEMON} from '../types';
+import {POKEMON_LOADING, SET_NEXT, SET_POKEMON} from '../types';
 
 const initialState = {
   pokemons: [],
   next: null,
-  back: null,
   loading: false,
 };
 
@@ -24,12 +23,6 @@ export const PokeReducer = (state = initialState, action) => {
         ...state,
         next: action.payload,
       };
-    case SET_BACK:
-      return {
-        ...state,
-        back: action.payload,
-      };
-
     default:
       return state;
   }
