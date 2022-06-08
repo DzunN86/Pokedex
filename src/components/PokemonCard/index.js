@@ -18,7 +18,7 @@ export default function PokemonCard(props) {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigation.navigate('Detail', pokemon)}>
+      onPress={() => navigation.navigate('PokeDetailScreen', pokemon)}>
       <View style={styles.card}>
         <View style={styles.card_spacing}>
           <View style={bgStyles}>
