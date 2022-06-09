@@ -50,7 +50,6 @@ export function fetchPokemons(next) {
       await dispatch(setNext(result.next));
       dispatch(pokemonLoading(false));
     } catch (error) {
-      console.log(error, '\n---ERROR FETCH POKEMON---');
       dispatch(pokemonLoading(false));
     }
   };
