@@ -7,14 +7,18 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {pokemonColors} from '../../utils';
+import { FONTS } from '../../themes';
+import {pokemonColors, backgroundColors} from '../../utils';
 
 export default function PokemonCard(props) {
   const {pokemon} = props;
   const navigation = useNavigation();
 
-  const pokemonColor = pokemonColors[pokemon.type];
+  const pokemonColor = backgroundColors[pokemon.type];
   const bgStyles = {backgroundColor: pokemonColor, ...styles.bgStyles};
+
+  const pokemonTypeColor = pokemonColors[pokemon.type];
+  const bgTypeStyles = {backgroundColor: pokemonTypeColor, ...styles.card_typeContainer};
 
   return (
     <TouchableWithoutFeedback
@@ -29,7 +33,7 @@ export default function PokemonCard(props) {
             <Text style={styles.card_name}>{pokemon.name}</Text>
             {pokemon.types.map((type, idx) => {
               return (
-                <View key={idx} style={styles.card_typeContainer}>
+                <View key={idx} style={bgTypeStyles}>
                   <Text style={styles.card_typeText}>{type.type.name}</Text>
                 </View>
               );
@@ -45,6 +49,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     height: 140,
+    margin: 2,
   },
   card_spacing: {
     flex: 1,
@@ -64,19 +69,18 @@ const styles = StyleSheet.create({
   },
   card_name: {
     color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
+    ...FONTS.h2,
     paddingTop: 10,
   },
   card_typeContainer: {
-    backgroundColor: '#fff',
-    opacity: 0.3,
+    // backgroundColor: '#fff',
+    // opacity: 0.3,
     borderRadius: 10,
     alignSelf: 'baseline',
     margin: 1,
   },
   card_typeText: {
-    color: 'black',
+    color: '#fff',
     paddingTop: 5,
     paddingRight: 10,
     paddingBottom: 5,

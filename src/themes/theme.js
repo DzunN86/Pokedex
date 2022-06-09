@@ -4,7 +4,7 @@ const {width, height} = Dimensions.get('window');
 export const COLORS = {
   // base colors
   primary: '#1686ED',
-  secondary: '#25282F',
+  secondary: '#092734',
 
   accent: '#4895ef',
   danger: '#f72585',
@@ -57,7 +57,7 @@ export const SIZES = {
 
 export const FONTS = {
   largeTitle: {
-    fontFamily: 'Poppins-regular',
+    fontFamily: 'Poppins-Bold',
     fontSize: SIZES.largeTitle,
     lineHeight: 55,
   },
