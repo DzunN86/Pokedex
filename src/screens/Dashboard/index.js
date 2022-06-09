@@ -1,20 +1,19 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, Text, View, Platform} from 'react-native';
+import {FlatList, Platform, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {PokemonCard} from '../../components';
+import {CustomButton, PokemonCard} from '../../components';
 import {fetchPokemons} from '../../store/actions';
 import {COLORS, FONTS} from '../../themes';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const pokemons = useSelector(state => state.PokeReducer.pokemons);
-  // const loading = useSelector(state => state.PokeReducer.loading);
-  // const next = useSelector(state => state.PokeReducer.next);
-  // const back = useSelector(state => state.PokeReducer.back);
+  const loading = useSelector(state => state.PokeReducer.loading);
+  const next = useSelector(state => state.PokeReducer.next);
 
   useEffect(() => {
-    dispatch(fetchPokemons());
-    console.log("Helloooooooooooooooooooooo pokemon", pokemons);
+    dispatch(fetchPokemons(next));
+    console.log('Helloooooooooooooooooooooo pokemon', pokemons);
   }, []);
 
   return (
@@ -27,6 +26,18 @@ export default function Dashboard() {
         keyExtractor={pokemon => String(pokemon.id)}
         renderItem={({item}) => <PokemonCard pokemon={item} />}
         contentContainerStyle={styles.flatListContentContainer}
+        ListFooterComponent={() => (
+          <View style={{padding: 5, marginTop: 10}}>
+            <CustomButton
+              primary
+              loading={loading}
+              disabled={loading}
+              title="Show More"
+              disable={next === null}
+              onPress={() => dispatch(fetchPokemons(next))}
+            />
+          </View>
+        )}
       />
     </View>
   );
@@ -46,6 +57,6 @@ const styles = StyleSheet.create({
   },
   flatListContentContainer: {
     paddingHorizontal: 5,
-    marginTop: Platform.OS === "android" ? 5 : 0,
-},
+    marginTop: Platform.OS === 'android' ? 5 : 0,
+  },
 });

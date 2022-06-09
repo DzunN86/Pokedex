@@ -8,6 +8,7 @@ import Reducers from './reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['pokemons','next'],
 };
 
 const configPersist = persistReducer(persistConfig, Reducers);
