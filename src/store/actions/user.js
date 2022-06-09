@@ -6,6 +6,7 @@ export const setUser = value => ({
   type: SET_USER,
   payload: value,
 });
+
 export const logoutUser = navigation => async dispatch => {
   await logout()
     .then(() => {
