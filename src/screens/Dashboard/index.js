@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
-import {FlatList, Platform, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, SafeAreaView, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {CustomButton, PokemonCard} from '../../components';
+import {MainBg} from '../../assets/images';
+import {CustomButton, HomeHeader, PokemonCard} from '../../components';
 import {fetchPokemons} from '../../store/actions';
-import {COLORS, FONTS} from '../../themes';
+import {COLORS, FONTS, SIZES} from '../../themes';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -13,19 +14,17 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(fetchPokemons(next));
-    console.log('Helloooooooooooooooooooooo pokemon', pokemons);
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text_title}>Pokédex</Text>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={pokemons}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        keyExtractor={pokemon => String(pokemon.id)}
+        keyExtractor={(pokemon, indx) => indx.toString()}
         renderItem={({item}) => <PokemonCard pokemon={item} />}
-        contentContainerStyle={styles.flatListContentContainer}
+        ListHeaderComponent={<HomeHeader />}
         ListFooterComponent={() => (
           <View style={{padding: 5, marginTop: 10}}>
             <CustomButton
@@ -39,14 +38,26 @@ export default function Dashboard() {
           </View>
         )}
       />
-    </View>
+      <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          zIndex: -1,
+        }}>
+        <Image source={MainBg} style={styles.bgImg} />
+        {/* <View style={{height: 300, backgroundColor: COLORS.secondary}} /> */}
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FBFB',
+    backgroundColor: COLORS.secondary,
     // padding: 10,
   },
   text_title: {
@@ -55,8 +66,8 @@ const styles = StyleSheet.create({
     margin: 10,
     marginBottom: 15,
   },
-  flatListContentContainer: {
-    paddingHorizontal: 5,
-    marginTop: Platform.OS === 'android' ? 5 : 0,
+  bgImg: {
+    width: '100%',
+    height: SIZES.height / 2,
   },
 });

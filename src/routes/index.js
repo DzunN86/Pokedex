@@ -56,7 +56,7 @@ function Router() {
         component={Profile}
         options={{
           headerStyle: {
-            backgroundColor: COLORS.primary,
+            backgroundColor: COLORS.secondary,
           },
           headerTintColor: COLORS.white,
           headerTitleStyle: {
