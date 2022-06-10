@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {memo} from 'react';
 import {
   Image,
   StyleSheet,
@@ -7,10 +7,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { FONTS } from '../../themes';
+import {FONTS} from '../../themes';
 import {pokemonColors, backgroundColors} from '../../utils';
 
-export default function PokemonCard(props) {
+const PokemonCard = props => {
   const {pokemon} = props;
   const navigation = useNavigation();
 
@@ -18,8 +18,10 @@ export default function PokemonCard(props) {
   const bgStyles = {backgroundColor: pokemonColor, ...styles.bgStyles};
 
   const pokemonTypeColor = pokemonColors[pokemon.type];
-  const bgTypeStyles = {backgroundColor: pokemonTypeColor, ...styles.card_typeContainer};
-
+  const bgTypeStyles = {
+    backgroundColor: pokemonTypeColor,
+    ...styles.card_typeContainer,
+  };
   return (
     <TouchableWithoutFeedback
       onPress={() => navigation.navigate('PokeDetailScreen', pokemon)}>
@@ -43,7 +45,9 @@ export default function PokemonCard(props) {
       </View>
     </TouchableWithoutFeedback>
   );
-}
+};
+
+export default memo(PokemonCard);
 
 const styles = StyleSheet.create({
   card: {

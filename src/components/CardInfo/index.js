@@ -1,5 +1,5 @@
 import {ListItem} from '@rneui/base';
-import React from 'react';
+import React, {memo} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS} from '../../themes';
@@ -23,7 +23,7 @@ const CardInfo = ({icon, topDivider, label, content, edit, onPress}) => {
   );
 };
 
-export default CardInfo;
+export default memo(CardInfo);
 
 const styles = StyleSheet.create({
   label: {

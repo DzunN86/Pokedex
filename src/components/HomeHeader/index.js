@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, {memo} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {Logo} from '../../assets/images';
 import {COLORS, FONTS, SIZES} from '../../themes';
@@ -60,4 +60,4 @@ const HomeHeader = () => {
   );
 };
 
-export default HomeHeader;
+export default memo(HomeHeader);

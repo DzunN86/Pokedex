@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {COLORS, FONTS} from '../../themes';
 
@@ -11,7 +11,7 @@ const OverlayLoading = ({title}) => {
   );
 };
 
-export default OverlayLoading;
+export default memo(OverlayLoading);
 
 const styles = StyleSheet.create({
   container: {

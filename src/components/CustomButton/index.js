@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {memo} from 'react';
 import {ActivityIndicator, Text, TouchableOpacity, View} from 'react-native';
 import {COLORS} from '../../themes';
 import styles from './styles';
@@ -56,4 +56,4 @@ function CustomButton({
   );
 }
 
-export default CustomButton;
+export default memo(CustomButton);
