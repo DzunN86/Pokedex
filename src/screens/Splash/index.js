@@ -2,7 +2,7 @@ import LottieView from 'lottie-react-native';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Pokeball} from '../../assets';
+import {APokeball} from '../../assets';
 import {COLORS, FONTS, SIZES} from '../../themes';
 
 export default function Splash({navigation}) {
@@ -10,7 +10,7 @@ export default function Splash({navigation}) {
   return (
     <View style={styles.container}>
       <LottieView
-        source={Pokeball}
+        source={APokeball}
         style={styles.logoImage}
         autoPlay
         loop={false}

@@ -8,7 +8,7 @@ const Fpassword = Yup.string()
   );
 
 export const loginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
+  email: Yup.string().email('Invalid email').required('Please Enter your email'),
   password: Fpassword,
 });
 
@@ -16,11 +16,11 @@ export const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
-    .required('Required'),
+    .required('Please Enter your name'),
   bio: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
+  email: Yup.string().email('Invalid email').required('Please Enter your email'),
   password: Fpassword,
 });

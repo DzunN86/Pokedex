@@ -41,8 +41,11 @@ export function fetchPokemons(next) {
             pokemonDetails.name.substring(1),
           type: pokemonDetails.types[0].type.name,
           types: pokemonDetails.types,
-          imgUrl:
-            pokemonDetails.sprites.other['official-artwork'].front_default,
+          species: pokemonDetails.species,
+          ability: pokemonDetails.abilities,
+          imgUrl: pokemonDetails.sprites.other['official-artwork'].front_default,
+          weight: pokemonDetails.weight,
+          height: pokemonDetails.height,
         });
       }
 

@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React, {memo} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+import { useSelector } from 'react-redux';
 import {Logo} from '../../assets/images';
 import {COLORS, FONTS, SIZES} from '../../themes';
 
 const HomeHeader = () => {
+  const userProfile = useSelector(state => state.UserReducer.userData);
   const navigation = useNavigation();
   return (
     <View
@@ -25,7 +27,9 @@ const HomeHeader = () => {
 
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')} style={{width: 45, height: 45}}>
           <Image
-            source={{uri: 'https://i.imgur.com/QrXZb.png'}}
+            source={{
+              uri: userProfile.avatar,
+            }}
             resizeMode="contain"
             style={{
               width: '100%',
@@ -44,7 +48,7 @@ const HomeHeader = () => {
             ...FONTS.body2,
             color: COLORS.white,
           }}>
-          Hello Victoria 👋
+          Hello {userProfile.name} 👋
         </Text>
 
         <Text

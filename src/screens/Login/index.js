@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   Alert,
   ScrollView,
@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch} from 'react-redux';
-import {Pikachu} from '../../assets';
+import {APokeball} from '../../assets';
 import {CustomButton, CustomInput} from '../../components';
 import {loginSchema, showError} from '../../plugins';
 import {getProfile, login} from '../../services';
@@ -23,7 +23,7 @@ export default function Login({navigation}) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const onLogin = ({ email, password }) => {
+  const onLogin = useCallback(({ email, password }) => {
     setLoading(true);
     login(email, password)
       .then(() => {
@@ -42,12 +42,12 @@ export default function Login({navigation}) {
         showError(err);
         setLoading(false);
       });
-  };
+  }, [loading, dispatch, navigation]);
 
   return (
     <ScrollView contentContainerStyle={styles.scroll} testID="LoginScreen">
       <View style={styles.container}>
-        <LottieView style={styles.logoImage} source={Pikachu} autoPlay />
+        <LottieView style={styles.logoImage} source={APokeball} autoPlay />
         <View style={styles.form}>
           <Formik
             initialValues={{email: '', password: ''}}
@@ -129,8 +129,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   logoImage: {
-    height: SIZES.width * 0.7,
-    width: SIZES.width * 0.7,
+    height: SIZES.width * 0.5,
+    width: SIZES.width * 0.5,
     alignSelf: 'center',
     // marginTop: 50,
   },

@@ -6,7 +6,7 @@ import {COLORS, FONTS} from '../../themes';
 
 const CardInfo = ({icon, topDivider, label, content, edit, onPress}) => {
   return (
-    <ListItem topDivider={topDivider}>
+    <ListItem topDivider={topDivider} containerStyle={{borderRadius: 20, marginVertical: 10}}>
       <Icon name={icon} size={20} color={COLORS.lightGray4} />
       <ListItem.Content>
         <ListItem.Subtitle style={styles.label} numberOfLines={1}>

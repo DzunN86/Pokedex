@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 function Router() {
   return (
     <Stack.Navigator
-      initialRouteName="DashboardScreen"
+      initialRouteName="SplashScreen"
       screenOptions={{
         gestureEnabled: true,
         gestureDirection: 'horizontal-inverted',

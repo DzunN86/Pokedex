@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "112546361758",
+    "firebase_url": "https://pokemon-app-48148-default-rtdb.firebaseio.com",
     "project_id": "pokemon-app-48148",
     "storage_bucket": "pokemon-app-48148.appspot.com"
   },

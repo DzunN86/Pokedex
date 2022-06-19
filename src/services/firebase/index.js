@@ -11,7 +11,7 @@ export const register = (email, pass) =>
 
 export const forgetPassword = email => auth().sendPasswordResetEmail(email);
 
-export const addUser = (email, name, uid, bio) =>
+export const addUser = (email, name, uid, bio, avatar) =>
   database()
     .ref(`/users/${uid}`)
     .set({
@@ -19,12 +19,12 @@ export const addUser = (email, name, uid, bio) =>
       email: email,
       name: name,
       bio: bio || 'my bio',
-      avatar: 'https://i.pravatar.cc/300',
+      avatar: avatar ||'https://i.pravatar.cc/300',
     });
 
 export const getProfile = email =>
   database()
     .ref('users/')
-    .orderByChild('id_user')
+    .orderByChild('email')
     .equalTo(email)
     .once('value');
